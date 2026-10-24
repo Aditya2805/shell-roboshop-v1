@@ -39,9 +39,9 @@ validate $? "enabling and installing redis"
 sed -i -e 's/^127.0.0.1/0.0.0.0/' -e 's/^protected-mode yes/protected-mode no/' /etc/redis/redis.conf
 validate $? "updating remote connections to redis"
 
-systemctl enable redis $>> logs_file
+systemctl enable redis &>> logs_file 
 validate $? "enable and start redis"
-systemctl start redis  $>> logs_file
+systemctl start redis  &>> logs_file
 validate $? "enable and start redis"
 
 
