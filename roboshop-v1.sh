@@ -20,7 +20,7 @@ aws ec2 run-instances \
 
 echo "$instance ID: $instance_id"
 
-if [ $instance ! = "frontend" ]; then
+if [ $instance != "frontend" ]; then
    
    IP=$(
     aws ec2 describe-instances \
@@ -45,11 +45,11 @@ fi
 aws route53 change-resource-record-sets \
     --hosted-zone-id $hosted_zone_id \
     --change-batch '{
-	  ""Changes": [
+	  "Changes": [
     {
       "Action": "UPSERT",
       "ResourceRecordSet": {
-        "Name": "$r53_record",
+        "Name": "'$r53_record'",
         "Type": "A",
         "TTL": 1,
         "ResourceRecords": [{"Value": "'$IP'"}]
