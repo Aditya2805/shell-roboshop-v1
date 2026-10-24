@@ -37,10 +37,10 @@ validate $? "Adding rabbitmq repo"
 dnf install erlang rabbitmq-server -y &>> logs_file
 validate $? "installing rabbitmq server"
 
-systemctl enable rabbitmq server &>> logs_file
+systemctl enable rabbitmq-server &>> logs_file
 validate $? "enabling rabbitmq server"
 
-systemctl start rabbitmq server &>> logs_file
+systemctl start rabbitmq-server &>> logs_file
 validate $? "starting rabbitmq server"
 
 rabbitmqctl list_users | grep -qw "roboshop"
