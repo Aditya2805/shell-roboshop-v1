@@ -47,7 +47,7 @@ else
     echo -e "system user roboshop already exists"
 fi
 
-rm-rf /app &>> $logs_file
+rm -rf /app &>> $logs_file
 validate $? "removing old code"
 
 
