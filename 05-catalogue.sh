@@ -3,6 +3,8 @@
 user_id=$(id -u)
 logs_folder="/var/log/roboshop"
 logs_file="${logs_folder}/${0}.log"
+domain_name="devopsadipractice.online"
+
 
 R="\e[31m"
 G="\e[32m"
@@ -59,6 +61,9 @@ cd /app
 npm install &>> $logs_file
 validate $? "install npm"
 
+sed -i "s/DOMAIN_NAME/$domain_name" catalogue.service
+cp catalogue.service /etc/systemd/system/catalogue.service &>> $logs_file
+validate $? "catalogue service "
 
 
 echo "$(timestamp) [INFO] Script completed in $SECONDS seconds"
