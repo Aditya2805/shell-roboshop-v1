@@ -45,6 +45,21 @@ else
     echo -e "system user roboshop already exists"
 fi
 
+mkdir -p /app &>> $logs_file
+validate $? "creating app directory"
+
+curl -L -o /tmp/catalogue.zip https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/catalogue-v4.zip &>> $logs_file
+validate $? "Downloading catalogue"
+
+cd /app 
+unzip /tmp/catalogue.zip  &>> $logs_file
+validate $? "unzipping catalogue"
+
+cd /app
+npm install &>> $logs_file
+validate $? "install npm"
+
+
 
 echo "$(timestamp) [INFO] Script completed in $SECONDS seconds"
 echo "$(timestamp) [INFO] ==== Script completed Execution =====" | tee -a $logs_file
