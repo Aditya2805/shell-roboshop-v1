@@ -47,6 +47,10 @@ else
     echo -e "system user roboshop already exists"
 fi
 
+rm-rf /app &>> $logs_file
+validate $? "removing old code"
+
+
 mkdir -p /app &>> $logs_file
 validate $? "creating app directory"
 
@@ -59,11 +63,11 @@ validate $? "unzipping catalogue"
 
 cd /app
 npm install &>> $logs_file
-validate $? "install npm"
+validate $? "install dependencies"
 
 sed -i "s/DOMAIN_NAME/$domain_name" catalogue.service
 cp catalogue.service /etc/systemd/system/catalogue.service &>> $logs_file
-validate $? "catalogue service "
+
 
 
 echo "$(timestamp) [INFO] Script completed in $SECONDS seconds"
