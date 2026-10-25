@@ -21,7 +21,7 @@ timestamp(){
 }
 
 validate(){
-    if [ $1 -ne 0 ]; then
+    if [[ $1 -ne 0 ]]; then
         echo -e "$(timestamp) [ERROR] ${2}..${R}FAILED${N}" | tee -a $logs_file
         exit 1
     else
@@ -40,7 +40,7 @@ id roboshop &>> $logs_file
 
 if [ $? -ne 0 ]; then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>> $logs_file 
-    validate &? "adding roboshop user"
+    validate $? "adding roboshop user"
 else
     echo -e "system user roboshop already exists"
 fi
